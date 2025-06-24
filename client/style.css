@@ -19,6 +19,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 30px 150px;
+  z-index: 100;
 }
 
 nav ul {
@@ -43,6 +44,30 @@ nav > a {
 }
 
 section {
+  text-align: center;
   padding: 10px;
-  margin-top: 160px;
+  margin-top: 100px;
+}
+
+.image-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 40px auto;
+}
+
+#blackcat,
+#hamster1 {
+  width: 230px;
+  height: 230px;
+  object-fit: cover;
+  margin-top: 57px;
+}
+
+@media (max-width: 900px) {
+  .image-row {
+    flex-direction: column;
+    gap: 20px;
+  }
 }
