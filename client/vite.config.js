@@ -7,9 +7,9 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "index.html"),
         about: resolve(__dirname, "about.html"),
-        about: resolve(__dirname, "contact.html"),
-        about: resolve(__dirname, "home.html"),
-        about: resolve(__dirname, "login.html"),
+        contact: resolve(__dirname, "contact.html"),
+        home: resolve(__dirname, "home.html"),
+        login: resolve(__dirname, "login.html")
       },
     },
   },
