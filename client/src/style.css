@@ -1,0 +1,137 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+  background-image: url(seamless-pattern-dog-paw-vector-illustration-colorful-paws-ob-black-background-texture-print_708605-97.avif);
+
+  padding-top: 10px;
+  min-height: 100%;
+  background-color: rgb(56, 56, 56);
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 20px;
+}
+
+nav {
+  background-color: rgb(23, 23, 23);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 20px;
+  z-index: 100;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 5em;
+  list-style: none;
+}
+
+nav ul a {
+  color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+nav > a {
+  font-size: 32px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.image-row.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100vw;
+  margin-top: 70px;
+  padding: 0;
+}
+
+.image-row.bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100vw;
+  padding: 0;
+  margin-top: -138px;
+}
+
+.text-between {
+  max-width: 400px;
+  color: #fff;
+  text-align: center;
+  margin: 0 20px;
+}
+
+.text-between h1 {
+  color: white;
+  font-size: 32px;
+  margin-top: 50px;
+}
+
+.text-between p {
+  margin-top: 30px;
+  line-height: 1.2;
+  font-size: 16px;
+  color: white;
+}
+
+.page-content {
+  max-width: 700px;
+  margin: 140px auto 0 auto;
+  text-align: center;
+  padding: 20px;
+  color: #fff;
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+.page-content h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.page-content h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.page-content ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.page-content li {
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+#blackcat,
+#hamster1,
+#gecko,
+#funnydog {
+  width: 230px;
+  height: 230px;
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  .image-row,
+  .image-row.top-row,
+  .image-row.bottom-row {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+  }
+}
