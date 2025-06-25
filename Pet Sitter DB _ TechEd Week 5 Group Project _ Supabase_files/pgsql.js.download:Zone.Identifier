@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://supabase.com/
+HostUrl=https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.52.2/min/vs/basic-languages/pgsql/pgsql.js
