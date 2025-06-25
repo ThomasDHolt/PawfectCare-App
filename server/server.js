@@ -33,11 +33,11 @@ app.get("/accounts/getById/:accountId", async (req, res) => {
 });
 
 app.get("/account/getByEmail/:email", async (req, res) => {
-  const accountEmail = req.params.email;
-  
-  const result = await db.query(`SELECT * FROM account WHERE account_email ILIKE '%${accountEmail%}`);
-  
-  res.json(result.rows);
+    const accountEmail = req.params.email;
+    
+    const result = await db.query(`SELECT * FROM account WHERE account_email ILIKE '%${accountEmail}%`);
+    
+    res.json(result.rows);
 });
 
 app.post("/accounts", async (req, res) => {
@@ -51,6 +51,39 @@ app.post("/accounts", async (req, res) => {
     const emailFromClient = body.email;
 
     const data = await db.query(`INSERT INTO account (account_name, account_type, hashed_password, salt, personal_info_id, account_email) VALUES ($1, $2, $3, $4, $5, $6)`, [accountNameFromClient, accountTypeFromClient, hashedPasswordFromClient, saltFromClient, personalInfoIdFromClient, emailFromClient]);
+
+    res.send(data);
+});
+
+app.put("/accounts/changeAccountName/:accountId", async (req, res) => {
+    const body = req.body;
+
+    const newAccountName = body.newAccountName;
+    const accountId = req.params.accountId;
+
+    const data = await db.query(`UPDATE account SET account_name = $1 WHERE account_id = $2`, [newAccountName, accountId]);
+
+    res.send(data);
+});
+
+app.put("/accounts/changeAccountEmail/:accountId", async (req, res) => {
+    const body = req.body;
+
+    const newAccountEmail = body.newAccountEmail;
+    const accountId = req.params.accountId;
+
+    const data = await db.query(`UPDATE account SET account_email = $1 WHERE account_id = $2`, [newAccountEmail, accountId]);
+
+    res.send(data);
+});
+
+app.put("/accounts/changeAccountPassword/:accountId", async (req, res) => {
+    const body = req.body;
+
+    const newHashedPassword = body.newHashedPassword;
+    const accountId = req.params.accountId;
+
+    const data = await db.query(`UPDATE account SET hashed_password = $1 WHERE account_id = $2`, [newHashedPassword, accountId]);
 
     res.send(data);
 });
@@ -70,11 +103,11 @@ app.get("/personalInfo/getById/:infoId", async (req, res) => {
 });
 
 app.get("/personalInfo/getByLocation/:location", async (req, res) => {
-  const location = req.params.location;
+    const location = req.params.location;
 
-  const result = await db.query(`SELECT * FROM personalinfo WHERE location ILIKE '%${location}%'`);
+    const result = await db.query(`SELECT * FROM personalinfo WHERE location ILIKE '%${location}%'`);
 
-  res.json(result.rows);
+    res.json(result.rows);
 });
 
 app.post("/personalInfo", async (req, res) => {
