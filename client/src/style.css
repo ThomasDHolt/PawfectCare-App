@@ -7,7 +7,6 @@
 body {
   text-align: center;
   background-image: url(seamless-pattern-dog-paw-vector-illustration-colorful-paws-ob-black-background-texture-print_708605-97.avif);
-
   padding-top: 10px;
   min-height: 100%;
   font-family: "Roboto Condensed", sans-serif;
@@ -69,6 +68,10 @@ nav > a {
   max-width: 400px;
   color: #fff;
   margin: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
 .text-between h1 {
@@ -119,7 +122,8 @@ nav > a {
 #blackcat,
 #hamster1,
 #gecko,
-#funnydog {
+#funnydog,
+#gecko2 {
   width: 230px;
   height: 230px;
   object-fit: cover;
@@ -135,18 +139,21 @@ nav > a {
   align-items: flex-start;
 }
 
-.home-main img#gecko2 {
-  width: 230px;
-  height: 230px;
-  object-fit: cover;
-  display: block;
+#bookapet {
+  margin-top: 20px;
+  padding: 10px 25px;
+  background-color: purple;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 17px;
+  cursor: pointer;
 }
 
 footer {
-  background-color: #171717;
+  background-color: rgb(23, 23, 23);
   color: white;
   padding: 10px 0;
-  font-family: "Roboto Condensed", sans-serif;
   font-size: 14px;
 }
 
@@ -154,6 +161,26 @@ footer a {
   color: white;
   text-decoration: none;
   margin: 0 5px;
+}
+
+form input,
+form textarea {
+  width: 50%;
+  padding: 8px;
+  border-radius: 4px;
+  border: none;
+  font-size: 16px;
+}
+
+form button {
+  margin-top: 15px;
+  background-color: purple;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 @media (max-width: 900px) {
