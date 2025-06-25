@@ -35,7 +35,7 @@ app.get("/accounts/getById/:accountId", async (req, res) => {
 app.get("/account/getByEmail/:email", async (req, res) => {
   const accountEmail = req.params.email;
   
-  const result = await db.query(`SELECT * FROM account WHERE account_email ILIKE '%${accountEmail%}`);
+  const result = await db.query(`SELECT * FROM account WHERE account_email ILIKE '%${accountEmail}%`);
   
   res.json(result.rows);
 });
@@ -85,6 +85,39 @@ app.post("/personalInfo", async (req, res) => {
     const locationFromClient = body.location;
 
     const data = await db.query(`INSERT INTO personalInfo (name, age, location) VALUES ($1, $2, $3)`, [nameFromClient, ageFromClient, locationFromClient]);
+
+    res.send(data);
+});
+
+app.put("/personalInfo/changeFullName/:info_id", async (req, res) => {
+    const body = req.body;
+
+    const newName = body.newName;
+    const infoId = req.params.info_id;
+
+    const data = await db.query(`UPDATE personalInfo SET name = $1 WHERE personal_info_id = $2`, [newName, infoId]);
+
+    res.send(data);
+});
+
+app.put("/personalInfo/changeAge/:info_id", async (req, res) => {
+    const body = req.body;
+
+    const newAge = body.newAge;
+    const infoId = req.params.info_id;
+
+    const data = await db.query(`UPDATE personalInfo SET age = $1 WHERE personal_info_id = $2`, [newAge, infoId]);
+
+    res.send(data);
+});
+
+app.put("/personalInfo/changeLocation/:info_id", async (req, res) => {
+    const body = req.body;
+
+    const newLocation = body.newLocation;
+    const infoId = req.params.info_id;
+
+    const data = await db.query(`UPDATE personalInfo SET location = $1 WHERE personal_info_id = $2`, [newLocation, infoId]);
 
     res.send(data);
 });
