@@ -35,7 +35,7 @@ app.get("/accounts/getById/:accountId", async (req, res) => {
 app.get("/account/getByEmail/:email", async (req, res) => {
   const accountEmail = req.params.email;
   
-  const result = await db.query(`SELECT * FROM account WHERE account_email ILIKE '%${accountEmail%}`);
+  const result = await db.query(`SELECT * FROM account WHERE account_email ILIKE '%${accountEmail}%`);
   
   res.json(result.rows);
 });
@@ -176,6 +176,50 @@ app.post("/petInfo", async (req, res) => {
     const petAllergiesFromClient = body.petAllergies;
 
     const data = await db.query(`INSERT INTO petinfo (pet_name, pet_type, pet_description, pet_age, pet_weight, pet_allergies) VALUES ($1, $2, $3, $4, $5, $6)`, [petNameFromClient, petTypeFromClient, petDescriptionFromClient, petAgeFromClient, petWeightFromClient, petAllergiesFromClient]);
+});
+
+app.put("/petInfo/changeName/:petId", async (req, res) => {
+    const body = req.body;
+
+    const newPetName = body.newPetName;
+    const petId = req.params.petId;
+
+    const data = await db.query(`UPDATE petInfo SET pet_name = $1 WHERE pet_id = $2`, [newPetName, petId]);
+
+    res.send(data);
+});
+
+app.put("/petInfo/changeAge/:petId", async (req, res) => {
+    const body = req.body;
+
+    const newPetAge = body.newPetAge;
+    const petId = req.params.petId;
+
+    const data = await db.query(`UPDATE petInfo SET pet_age = $1 WHERE pet_id = $2`, [newPetAge, petId]);
+
+    res.send(data);
+});
+
+app.put("/petInfo/changeWeight/:petId", async (req, res) => {
+    const body = req.body;
+
+    const newPetWeight = body.newPetWeight;
+    const petId = req.params.petId;
+
+    const data = await db.query(`UPDATE petInfo SET pet_weight = $1 WHERE pet_id = $2`, [newPetWeight, petId]);
+
+    res.send(data);
+});
+
+app.put("/petInfo/changeAllergies/:petId", async (req, res) => {
+    const body = req.body;
+
+    const newPetAllergies = body.newPetAllergies;
+    const petId = req.params.petId;
+
+    const data = await db.query(`UPDATE petInfo SET pet_allergies = $1 WHERE pet_id = $2`, [newPetAllergies, petId]);
+
+    res.send(data);
 });
 
 app.listen("4974", () => {
