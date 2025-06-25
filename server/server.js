@@ -61,6 +61,14 @@ app.get("/personalInfo/getById/:infoId", async (req, res) => {
     res.json(result.rows);
 });
 
+app.get("/personalInfo/getByLocation/:location", async (req, res) => {
+  const location = req.params.location;
+  const result = await db.query(
+    `SELECT * FROM personalinfo WHERE location ILIKE %${location}% `
+  );
+  res.json(result.rows);
+});
+
 app.post("/personalInfo", async (req, res) => {
     const body = req.body;
 
