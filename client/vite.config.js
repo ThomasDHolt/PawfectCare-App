@@ -10,7 +10,7 @@ export default defineConfig({
         contact: resolve(__dirname, "contact/index.html"),
         home: resolve(__dirname, "home/index.html"),
         login: resolve(__dirname, "login/index.html"),
-        signup: resolve(__dirname, "signup/index.html"),
+        signup: resolve(__dirname, "signup/index.html")
       },
     },
   },
