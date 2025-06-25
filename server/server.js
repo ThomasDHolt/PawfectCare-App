@@ -63,9 +63,9 @@ app.get("/personalInfo/getById/:infoId", async (req, res) => {
 
 app.get("/personalInfo/getByLocation/:location", async (req, res) => {
   const location = req.params.location;
-  const result = await db.query(
-    `SELECT * FROM personalinfo WHERE location ILIKE %${location}% `
-  );
+
+  const result = await db.query(`SELECT * FROM personalinfo WHERE location ILIKE '%${location}%'`);
+
   res.json(result.rows);
 });
 
@@ -147,6 +147,15 @@ app.get("/petInfo/getById/:petId", async (req, res) => {
 
     res.json(result.rows);
 });
+
+app.get("/petInfo/getByPetType/:petType", async (req, res) => {
+    const petType = req.params.petType;
+
+    const result = await db.query(`SELECT * FROM petinfo WHERE pet_type ILIKE '${petType}'`);
+
+    res.json(result.rows);
+});
+
 
 app.post("/petInfo", async (req, res) => {
     const body = req.body;
