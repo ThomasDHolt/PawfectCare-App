@@ -26,6 +26,11 @@ nav {
   z-index: 100;
 }
 
+#ourlogo {
+  height: 60px;
+  width: auto;
+}
+
 nav ul {
   display: flex;
   justify-content: center;
@@ -47,26 +52,35 @@ nav > a {
   text-decoration: none;
 }
 
-.image-row.top-row {
-  margin-top: 70px;
-}
-
-.image-row.bottom-row {
-  margin-top: -138px;
-}
-
 .image-row.top-row,
 .image-row.bottom-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
   padding: 0;
+}
+
+.image-row.top-row {
+  margin-top: 95px;
+}
+
+.image-row.bottom-row {
+  margin-top: 40px;
+}
+
+.page-content,
+.text-between {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 25px 30px;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .text-between {
   max-width: 400px;
-  color: #fff;
   margin: 0 20px;
   display: flex;
   flex-direction: column;
@@ -88,15 +102,10 @@ nav > a {
 .page-content {
   max-width: 700px;
   margin: 100px auto;
-  color: #fff;
-  text-align: center;
+  display: block;
 }
 
-.page-content h1 {
-  font-size: 36px;
-  margin-bottom: 20px;
-}
-
+.page-content h1,
 .page-content h2 {
   font-size: 36px;
   margin-bottom: 20px;
@@ -110,13 +119,6 @@ nav > a {
 .page-content li {
   margin-bottom: 30px;
   font-size: 18px;
-}
-
-.page-content,
-.text-between {
-  background-color: rgba(0, 0, 0, 0.9);
-  padding: 25px 30px;
-  border-radius: 10px;
 }
 
 #blackcat,
@@ -139,7 +141,8 @@ nav > a {
   align-items: flex-start;
 }
 
-#bookapet {
+#bookapet,
+form button {
   margin-top: 20px;
   padding: 10px 25px;
   background-color: purple;
@@ -148,19 +151,6 @@ nav > a {
   border-radius: 5px;
   font-size: 17px;
   cursor: pointer;
-}
-
-footer {
-  background-color: rgb(23, 23, 23);
-  color: white;
-  padding: 10px 0;
-  font-size: 14px;
-}
-
-footer a {
-  color: white;
-  text-decoration: none;
-  margin: 0 5px;
 }
 
 form input,
@@ -172,22 +162,59 @@ form textarea {
   font-size: 16px;
 }
 
-form button {
-  margin-top: 15px;
-  background-color: purple;
+footer {
+  background-color: rgb(23, 23, 23);
   color: white;
-  border: none;
-  padding: 10px 25px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
+  padding: 10px 0;
+  font-size: 14px;
+  width: 100%;
 }
 
-@media (max-width: 900px) {
+footer a {
+  color: white;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+@media (max-width: 400px) {
+  body {
+    padding-top: 180px;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  #ourlogo {
+    height: 40px;
+    margin-bottom: 10px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+    margin-top: 10px;
+    padding: 0;
+  }
+
+  nav ul a {
+    padding: 8px 0;
+    width: 100%;
+    text-align: center;
+  }
+
   .image-row {
     flex-direction: column;
     align-items: center;
     width: 100%;
     gap: 20px;
+  }
+
+  .image-row.top-row {
+    margin-top: 150px;
   }
 }
