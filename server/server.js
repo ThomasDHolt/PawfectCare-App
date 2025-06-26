@@ -164,6 +164,39 @@ app.post("/petSitters", async (req, res) => {
     res.send(data);
 });
 
+app.put("/petSitters/changeFees/:accountId", async (req, res) => {
+    const body = req.body;
+
+    const newFees = body.newFees;
+    const accountId = req.params.accountId;
+
+    const data = await db.query(`UPDATE petSitter SET fees = $1 WHERE account_id = $2`, [newFees, accountId]);
+
+    res.send(data);
+});
+
+app.put("/petSitters/changeDescription/:accountId", async (req, res) => {
+    const body = req.body;
+
+    const newDescription = body.newDescription;
+    const accountId = req.params.accountId;
+
+    const data = await db.query(`UPDATE petSitter SET description = $1 WHERE account_id = $2`, [newDescription, accountId]);
+
+    res.send(data);
+});
+
+app.put("/petSitters/changeRating/:accountId", async (req, res) => {
+    const body = req.body;
+
+    const newRating = body.newRating;
+    const accountId = req.params.accountId;
+
+    const data = await db.query(`UPDATE petSitter SET rating = $1 WHERE account_id = $2`, [newRating, accountId]);
+
+    res.send(data);
+});
+
 app.get("/petInfo", async (req, res) => {
     const result = await db.query('SELECT * FROM petinfo');
 
