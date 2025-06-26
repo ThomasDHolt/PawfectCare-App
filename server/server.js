@@ -115,6 +115,28 @@ app.post("/petOwners", async (req, res) => {
     res.send(data);
 });
 
+app.put("/petOwners/changePetAmount/:accountId", async (req, res) => {
+    const body = req.body;
+
+    const newPetAmount = body.newPetAmount;
+    const accountId = req.params.accountId;
+
+    const data = await db.query(`UPDATE petOwner SET number_of_pets = $1 WHERE account_id = $2`, [newPetAmount, accountId]);
+
+    res.send(data);
+});
+
+app.put("/petOwners/addPetId/:accountId", async (req, res) => {
+    const body = req.body;
+
+    const newPetId = body.newPetId;
+    const accountId = req.params.accountId;
+
+    const data = await db.query(`UPDATE petOwner SET pet_ids = ARRAY_APPEND(pet_ids, $1) WHERE account_id = $2`, [newPetId, accountId]);
+
+    res.send(data);
+});
+
 app.get("/petSitters", async (req, res) => {
     const result = await db.query('SELECT * FROM petsitter');
 
