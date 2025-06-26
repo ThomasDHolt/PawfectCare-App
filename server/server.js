@@ -32,10 +32,18 @@ app.get("/accounts/getById/:accountId", async (req, res) => {
     res.json(result.rows);
 });
 
-app.get("/account/getByEmail/:email", async (req, res) => {
+app.get("/accounts/getByEmail/:email", async (req, res) => {
     const accountEmail = req.params.email;
     
-    const result = await db.query(`SELECT * FROM account WHERE account_email ILIKE '%${accountEmail}%`);
+    const result = await db.query(`SELECT * FROM account WHERE account_email ILIKE '%${accountEmail}%'`);
+    
+    res.json(result.rows);
+});
+
+app.get("/accounts/getByType/:accountType", async (req, res) => {
+    const accountType = req.params.accountType;
+
+    const result = await db.query(`SELECT * FROM account WHERE account_type ILIKE '%${accountType}%'`);
     
     res.json(result.rows);
 });
