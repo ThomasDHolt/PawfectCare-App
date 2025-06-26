@@ -141,7 +141,10 @@ nav > a {
 }
 
 #bookapet,
-form button {
+form button,
+a.homepagelink,
+a.aboutpagelink,
+a.contactpagelink {
   margin-top: 20px;
   padding: 10px 25px;
   background-color: purple;
