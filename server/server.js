@@ -88,6 +88,14 @@ app.put("/accounts/changeAccountPassword/:accountId", async (req, res) => {
     res.send(data);
 });
 
+app.delete("/accounts/:accountId", async (req, res) => {
+    const accountId = req.params.accountId;
+
+    const data = await db.query(`DELETE FROM account WHERE account_id = $1`, [accountId]);
+
+    res.send(data);
+});
+
 app.get("/personalInfo", async (req, res) => {
     const result = await db.query('SELECT * FROM personalinfo');
 
@@ -155,6 +163,14 @@ app.put("/personalInfo/changeLocation/:info_id", async (req, res) => {
     res.send(data);
 });
 
+app.delete("/personalInfo/:infoId", async (req, res) => {
+    const infoId = req.params.infoId;
+
+    const data = await db.query(`DELETE FROM personalInfo WHERE personal_info_id = $1`, [infoId]);
+
+    res.send(data);
+});
+
 app.get("/petOwners", async (req, res) => {
     const result = await db.query('SELECT * FROM petowner');
 
@@ -199,6 +215,14 @@ app.put("/petOwners/addPetId/:accountId", async (req, res) => {
     const accountId = req.params.accountId;
 
     const data = await db.query(`UPDATE petOwner SET pet_ids = ARRAY_APPEND(pet_ids, $1) WHERE account_id = $2`, [newPetId, accountId]);
+
+    res.send(data);
+});
+
+app.delete("/petOwners/:accountId", async (req, res) => {
+    const accountId = req.params.accountId;
+
+    const data = await db.query(`DELETE FROM petOwner WHERE account_id = $1`, [accountId]);
 
     res.send(data);
 });
@@ -259,6 +283,14 @@ app.put("/petSitters/changeRating/:accountId", async (req, res) => {
     const accountId = req.params.accountId;
 
     const data = await db.query(`UPDATE petSitter SET rating = $1 WHERE account_id = $2`, [newRating, accountId]);
+
+    res.send(data);
+});
+
+app.delete("/petSitters/:accountId", async (req, res) => {
+    const accountId = req.params.accountId;
+
+    const data = await db.query(`DELETE FROM petSitter WHERE account_id = $1`, [accountId]);
 
     res.send(data);
 });
@@ -339,6 +371,14 @@ app.put("/petInfo/changeAllergies/:petId", async (req, res) => {
     const petId = req.params.petId;
 
     const data = await db.query(`UPDATE petInfo SET pet_allergies = $1 WHERE pet_id = $2`, [newPetAllergies, petId]);
+
+    res.send(data);
+});
+
+app.delete("/petInfo/:petId", async (req, res) => {
+    const petId = req.params.petId;
+
+    const data = await db.query(`DELETE FROM petInfo WHERE pet_id = $1`, [petId]);
 
     res.send(data);
 });
