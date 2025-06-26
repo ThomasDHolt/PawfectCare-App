@@ -6,11 +6,31 @@
 
 body {
   text-align: center;
-  background-image: url(seamless-pattern-dog-paw-vector-illustration-colorful-paws-ob-black-background-texture-print_708605-97.avif);
+  background-image: url(potentialbg2.png);
   padding-top: 10px;
   min-height: 100%;
   font-family: "Roboto Condensed", sans-serif;
   font-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.main-page {
+  background-image: url(dogpatternbg.avif);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.contact-page {
+  background-image: url(catphone.webp);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.about-page {
+  background-image: url(thinkerr.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 nav {
@@ -121,23 +141,13 @@ nav > a {
 }
 
 #blackcat,
-#hamster1,
+#hamster,
 #gecko,
-#funnydog,
-#gecko2 {
-  width: 230px;
-  height: 230px;
+#funnydog {
+  margin-top: 15px;
+  width: 130px;
+  height: 130px;
   object-fit: cover;
-}
-
-.home-main {
-  display: flex;
-  gap: 40px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 140px;
-  max-width: 1200px;
-  align-items: flex-start;
 }
 
 #bookapet,
