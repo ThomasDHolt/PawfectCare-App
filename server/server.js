@@ -33,11 +33,11 @@ app.get("/accounts/getById/:accountId", async (req, res) => {
 });
 
 app.get("/account/getByEmail/:email", async (req, res) => {
-  const accountEmail = req.params.email;
-  
-  const result = await db.query(`SELECT * FROM account WHERE account_email ILIKE '%${accountEmail}%`);
-  
-  res.json(result.rows);
+    const accountEmail = req.params.email;
+    
+    const result = await db.query(`SELECT * FROM account WHERE account_email ILIKE '%${accountEmail}%`);
+    
+    res.json(result.rows);
 });
 
 app.post("/accounts", async (req, res) => {
@@ -51,6 +51,39 @@ app.post("/accounts", async (req, res) => {
     const emailFromClient = body.email;
 
     const data = await db.query(`INSERT INTO account (account_name, account_type, hashed_password, salt, personal_info_id, account_email) VALUES ($1, $2, $3, $4, $5, $6)`, [accountNameFromClient, accountTypeFromClient, hashedPasswordFromClient, saltFromClient, personalInfoIdFromClient, emailFromClient]);
+
+    res.send(data);
+});
+
+app.put("/accounts/changeAccountName/:accountId", async (req, res) => {
+    const body = req.body;
+
+    const newAccountName = body.newAccountName;
+    const accountId = req.params.accountId;
+
+    const data = await db.query(`UPDATE account SET account_name = $1 WHERE account_id = $2`, [newAccountName, accountId]);
+
+    res.send(data);
+});
+
+app.put("/accounts/changeAccountEmail/:accountId", async (req, res) => {
+    const body = req.body;
+
+    const newAccountEmail = body.newAccountEmail;
+    const accountId = req.params.accountId;
+
+    const data = await db.query(`UPDATE account SET account_email = $1 WHERE account_id = $2`, [newAccountEmail, accountId]);
+
+    res.send(data);
+});
+
+app.put("/accounts/changeAccountPassword/:accountId", async (req, res) => {
+    const body = req.body;
+
+    const newHashedPassword = body.newHashedPassword;
+    const accountId = req.params.accountId;
+
+    const data = await db.query(`UPDATE account SET hashed_password = $1 WHERE account_id = $2`, [newHashedPassword, accountId]);
 
     res.send(data);
 });
@@ -70,11 +103,11 @@ app.get("/personalInfo/getById/:infoId", async (req, res) => {
 });
 
 app.get("/personalInfo/getByLocation/:location", async (req, res) => {
-  const location = req.params.location;
+    const location = req.params.location;
 
-  const result = await db.query(`SELECT * FROM personalinfo WHERE location ILIKE '%${location}%'`);
+    const result = await db.query(`SELECT * FROM personalinfo WHERE location ILIKE '%${location}%'`);
 
-  res.json(result.rows);
+    res.json(result.rows);
 });
 
 app.post("/personalInfo", async (req, res) => {
@@ -148,6 +181,28 @@ app.post("/petOwners", async (req, res) => {
     res.send(data);
 });
 
+app.put("/petOwners/changePetAmount/:accountId", async (req, res) => {
+    const body = req.body;
+
+    const newPetAmount = body.newPetAmount;
+    const accountId = req.params.accountId;
+
+    const data = await db.query(`UPDATE petOwner SET number_of_pets = $1 WHERE account_id = $2`, [newPetAmount, accountId]);
+
+    res.send(data);
+});
+
+app.put("/petOwners/addPetId/:accountId", async (req, res) => {
+    const body = req.body;
+
+    const newPetId = body.newPetId;
+    const accountId = req.params.accountId;
+
+    const data = await db.query(`UPDATE petOwner SET pet_ids = ARRAY_APPEND(pet_ids, $1) WHERE account_id = $2`, [newPetId, accountId]);
+
+    res.send(data);
+});
+
 app.get("/petSitters", async (req, res) => {
     const result = await db.query('SELECT * FROM petsitter');
 
@@ -171,6 +226,39 @@ app.post("/petSitters", async (req, res) => {
     const ratingFromClient = body.rating;
 
     const data = await db.query(`INSERT INTO petsitter (account_id, fees, description, rating) VALUES ($1, $2, $3, $4)`, [accountIdFromClient, feesFromClient, descriptionFromClient, ratingFromClient]);
+
+    res.send(data);
+});
+
+app.put("/petSitters/changeFees/:accountId", async (req, res) => {
+    const body = req.body;
+
+    const newFees = body.newFees;
+    const accountId = req.params.accountId;
+
+    const data = await db.query(`UPDATE petSitter SET fees = $1 WHERE account_id = $2`, [newFees, accountId]);
+
+    res.send(data);
+});
+
+app.put("/petSitters/changeDescription/:accountId", async (req, res) => {
+    const body = req.body;
+
+    const newDescription = body.newDescription;
+    const accountId = req.params.accountId;
+
+    const data = await db.query(`UPDATE petSitter SET description = $1 WHERE account_id = $2`, [newDescription, accountId]);
+
+    res.send(data);
+});
+
+app.put("/petSitters/changeRating/:accountId", async (req, res) => {
+    const body = req.body;
+
+    const newRating = body.newRating;
+    const accountId = req.params.accountId;
+
+    const data = await db.query(`UPDATE petSitter SET rating = $1 WHERE account_id = $2`, [newRating, accountId]);
 
     res.send(data);
 });
@@ -209,6 +297,50 @@ app.post("/petInfo", async (req, res) => {
     const petAllergiesFromClient = body.petAllergies;
 
     const data = await db.query(`INSERT INTO petinfo (pet_name, pet_type, pet_description, pet_age, pet_weight, pet_allergies) VALUES ($1, $2, $3, $4, $5, $6)`, [petNameFromClient, petTypeFromClient, petDescriptionFromClient, petAgeFromClient, petWeightFromClient, petAllergiesFromClient]);
+});
+
+app.put("/petInfo/changeName/:petId", async (req, res) => {
+    const body = req.body;
+
+    const newPetName = body.newPetName;
+    const petId = req.params.petId;
+
+    const data = await db.query(`UPDATE petInfo SET pet_name = $1 WHERE pet_id = $2`, [newPetName, petId]);
+
+    res.send(data);
+});
+
+app.put("/petInfo/changeAge/:petId", async (req, res) => {
+    const body = req.body;
+
+    const newPetAge = body.newPetAge;
+    const petId = req.params.petId;
+
+    const data = await db.query(`UPDATE petInfo SET pet_age = $1 WHERE pet_id = $2`, [newPetAge, petId]);
+
+    res.send(data);
+});
+
+app.put("/petInfo/changeWeight/:petId", async (req, res) => {
+    const body = req.body;
+
+    const newPetWeight = body.newPetWeight;
+    const petId = req.params.petId;
+
+    const data = await db.query(`UPDATE petInfo SET pet_weight = $1 WHERE pet_id = $2`, [newPetWeight, petId]);
+
+    res.send(data);
+});
+
+app.put("/petInfo/changeAllergies/:petId", async (req, res) => {
+    const body = req.body;
+
+    const newPetAllergies = body.newPetAllergies;
+    const petId = req.params.petId;
+
+    const data = await db.query(`UPDATE petInfo SET pet_allergies = $1 WHERE pet_id = $2`, [newPetAllergies, petId]);
+
+    res.send(data);
 });
 
 app.listen("4974", () => {
