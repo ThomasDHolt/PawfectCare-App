@@ -29,23 +29,35 @@ async function DisplayPetSitters()
         const personalInfo = await FetchPetSitterPersonalInfo(singleAccount.personal_info_id);
         const sitterInfo = await FetchPetSitterInfo(singleAccount.account_id);
 
-        const div = document.createElement("div");
+        const blockDiv = document.createElement("div");
+        const topDiv = document.createElement("div");
+        const mainDiv = document.createElement("div");
+        const minorDetailsDiv = document.createElement("div");
 
         const name = document.createElement("p");
         const location = document.createElement("p");
         const description = document.createElement("p");
         const fees = document.createElement("p");
+        const rating = document.createElement("p");
 
-        console.log(div);
+        topDiv.append(name, fees);
+        minorDetailsDiv.append(location, rating);
+        mainDiv.append(minorDetailsDiv, description);
+        blockDiv.append(topDiv, mainDiv);
 
-        div.append(name, location, description, fees);
+        topDiv.classList.add("info-block-header", "flex-container", "flex-row", "flex-space-between", "flex-centre-vertical");
+        minorDetailsDiv.classList.add("minor-details-padding", "flex-container", "flex-row", "flex-space-between", "flex-centre-vertical");
+        mainDiv.classList.add("info-block-main");
+        blockDiv.classList.add("sitter-block-margin");
+        description.classList.add("description");
 
         name.innerText = personalInfo.name;
-        location.innerText = personalInfo.location;
+        location.innerText = `Location: ${personalInfo.location}`;
         description.innerText = sitterInfo.description;
-        fees.innerText = sitterInfo.fees;
+        fees.innerText = `Fees: £${sitterInfo.fees}`;
+        rating.innerText = `Rated ${sitterInfo.rating} out of 5`;
 
-        petSittersSection.appendChild(div);
+        petSittersSection.appendChild(blockDiv);
     });
 }
 
