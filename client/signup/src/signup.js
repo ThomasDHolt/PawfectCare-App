@@ -1,3 +1,5 @@
+import bcrypt from "bcryptjs"
+
 const form = document.getElementById("form");
 const firstname_input = document.getElementById("firstname-input");
 const email_input = document.getElementById("email-input");
@@ -5,8 +7,8 @@ const password_input = document.getElementById("password-input");
 const repeat_password_input = document.getElementById("repeat-password-input");
 const error_message = document.getElementById("error-message");
 
-form.addEventListener("submit", (e) => {
-  //e.preventDefault() Prevent Submit
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
   let errors = [];
 
@@ -18,6 +20,11 @@ form.addEventListener("submit", (e) => {
       password_input.value,
       repeat_password_input.value
     );
+
+    const formData = new FormData(form);
+    const newAccountData = Object.fromEntries(formData);
+
+    await HandleSignUp(newAccountData);
   } else {
     // If we dont have a firstname input the we are in the login
     errors = getLoginFormErrors(email_input.value, password_input.value);
@@ -25,7 +32,6 @@ form.addEventListener("submit", (e) => {
 
   if (errors.length > 0) {
     // if there any errors inside array
-    e.preventDefault();
     error_message.innerText = errors.join(". ");
   }
 });
@@ -71,3 +77,28 @@ allInputs.forEach((input) => {
     }
   });
 });
+
+async function HandleSignUp(signUpData)
+{
+  const salt = bcrypt.genSaltSync(10);
+  const plainPassword = signUpData.password;
+
+  const passwordHash = bcrypt.hashSync(plainPassword, salt);
+
+  const accountObject = {
+    accountName: signUpData.firstname,
+    accountType: "petOwner",
+    hashedPassword: passwordHash,
+    salt: salt,
+    personalInfoId: 100,
+    email: signUpData.email
+  }
+
+  await fetch("https://week5-petsitterapp-server.onrender.com/accounts", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(accountObject)
+  });
+}
