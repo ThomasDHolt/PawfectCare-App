@@ -101,4 +101,6 @@ async function HandleSignUp(signUpData)
     },
     body: JSON.stringify(accountObject)
   });
+
+  window.location.href = 'https://week5-petsitterapp-client.onrender.com/home/';
 }
